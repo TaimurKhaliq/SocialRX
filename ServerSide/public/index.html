@@ -1,0 +1,22 @@
+<html>
+<p id="text">socket.io</p>
+
+<script src="socket.io/socket.io.js"></script> 
+<script src="jquery-1.6.1.min.js"></script>
+
+<script> 
+ 	$(document).ready(function(){
+
+	 	var socket 	= io.connect(),
+	 			text 		= $('#text');
+
+	  socket.on('connect', function () {
+
+			socket.on('message', function (msg) {
+				// my msg
+				text.html(msg);
+			});
+  	});
+	 	
+	});
+</script> 
