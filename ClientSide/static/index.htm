@@ -1,0 +1,578 @@
+<html>
+<head>
+<style>
+.mainContainer
+{
+	width: 600px;
+	height: 800px;
+}
+
+.leftPanel
+{
+	float:left;
+	width:300px;
+	padding-left: 10px;
+	padding-top: 20px;
+}
+
+.rightPanel
+{
+	float:right;
+	display: none;
+	padding-top: 20px;
+}
+
+.mainHeading
+{
+	font-size: 34px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	text-align: center;
+}
+
+.questionListPanel
+{
+	width: 275px;
+	background-color: orange;
+	border-radius: 5px;
+	border: ridge;
+	border-image: initial;
+	border-color: black;
+	border-width: 2px;
+}
+
+.questionDetailPanel
+{
+	position: absolute;
+	left: 350px;
+	top: 3px;
+}
+
+.questionDiscussionPanel
+{
+	border: none;
+	border-radius: 5px;
+	overflow: auto;
+	height: 250px;
+}
+
+.questionList
+{
+	width: 300px;
+	list-style: none;
+	line-height: 35px;
+}
+
+.listButton
+{
+	float: right;	
+}
+
+.button
+{
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	border-radius: .5em;
+	border-style: ridge;
+	background-color: white;
+	border-color: white;
+}
+
+.button:hover 
+{
+	text-decoration: italic;
+}
+
+.button:active
+{
+	position: relative;
+	top: 1px;
+}
+
+.listItem
+{
+	border-style: none;
+	cursor : hand;
+	padding-left: 15px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	
+}
+
+.answer
+{
+	color: white;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 3px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	padding-top: 10px;
+}
+
+.AnswerLabel
+{
+	color:red;
+	font-size:18px;
+	margin-bottom:5px;
+ 	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	
+}
+
+.questionHeading
+{
+	font-size: 22px;
+	margin-bottom: 10px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 5px;
+}
+
+.postQuestion
+{
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+.postQuestionText
+{
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 10px;
+	width: 545px;
+	border: ridge;
+	line-height: 40px;
+	border-radius: 10px;
+	border-image: initial;
+	border-color: black;	
+}
+
+.loginButton, b_answer
+{
+	line-height: 4;
+}
+
+input.labelHighlight 
+{ 
+	color: grey;
+	font-size: 14px;
+}
+
+.simple_overlay 
+{
+	
+	/* must be initially hidden */
+	display:none;
+	
+	/* place overlay on top of other elements */
+	z-index:10000;
+	
+	/* styling */
+	background-color: lightgrey;
+	
+	width:675px;	
+	border:1px solid #666;
+	
+	/* CSS3 styling for latest browsers */
+	-moz-box-shadow:0 0 90px 5px #000;
+	-webkit-box-shadow: 0 0 90px #000;	
+}
+
+/* close button positioned on upper right corner */
+.simple_overlay .close 
+{
+	background-image:url(http://static.flowplayer.org/tools/img/overlay/close.png);
+	position:absolute;
+	right:-15px;
+	top:-15px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+}
+
+.discussionFrame
+{
+	list-style: none;
+	width: 250px;
+	display: block;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	background-color: #D3F8D3;
+	border: ridge;
+	border-image: initial;
+	border-color: black;
+	border-width: 2px;
+	
+}
+
+.commentsHeading
+{
+	font-size: 22px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	margin-bottom: 10px;
+	padding-left: 5px;
+	padding-top: 10px;
+}
+
+.listItemDisc
+{
+	border-style: none;
+	width: 300px;
+	cursor : hand;
+	padding-left: 15px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+}
+
+.userLabel
+{
+	font-style:normal;
+	font-color: Grey;
+}
+
+.inputButtonComment
+{
+	width: 250px;
+}
+
+.answerLabel2
+{
+	font-size: 22px;
+	color: white;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+
+.userComment
+{
+	margin-left: 5px;
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+}
+
+.answerPanel
+{
+	background-color: #333;
+	width: 250px;
+	border-radius: 5px;
+	border: ridge;
+	border-image: initial;
+	border-color: black;
+	border-width: 2px;
+}
+
+.filterOptions
+{
+	margin-left: 15px;
+}
+.sortItem
+{
+	font-size: 14px;
+	padding-right: 3px;
+	text-decoration: underline;
+	color: Grey;
+}
+
+.sortItem a
+{
+	text-decoration:none;
+	color:Grey;
+}
+
+.scrollable 
+{
+	/* required settings */
+	position:relative;
+	overflow:hidden;
+
+	/* vertical scrollables have typically larger height than width but not now */
+	height: 665px;
+	width: 700px;
+}
+
+/* root element for scrollable items */
+.scrollable .items 
+{
+	position:absolute;
+
+	/* this time we have very large space for the height */
+	height:20000em;
+}
+
+.loginStatus
+{
+	
+}
+
+.userName
+{
+	
+}
+
+.userSearch
+{
+	display:hidden;
+}
+
+.postAnswer
+{
+	color: #333;
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+.postAnswerText
+{
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-left: 10px;
+	width: 545px;
+	border: ridge;
+	line-height: 40px;
+	border-radius: 10px;
+	border-image: initial;
+	border-color: black;	
+}
+
+.b_answer
+{
+	line-height: 4;
+	width: 40px;
+	margin-left: 2px;
+}
+
+.registrationHeading
+{
+	
+}
+
+.overlayClass
+{
+	margin-left:10px;
+	font-size: 32px;
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+.selectedContent
+{
+	
+}
+
+.reg_leftPanel
+{
+	float: left;
+	width: 100px;
+	background-color: lightGrey;
+}
+
+.reg_rightPanel
+{
+	float: right;
+	width: 500px;
+	background-color: skyBlue;
+	min-height: 200px;
+	padding-left: 20px;
+}
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script src="http://www.kryogenix.org/code/browser/labelify/jquery.labelify.js"></script>
+<script src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/libs/jquery.tools.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/libs/socket.io.js"></script> 
+<script type="text/javascript" src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/libs/underscore.js"></script> 
+<script type="text/javascript" src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/libs/backbone.js"></script> 
+<script src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/scripts/authentication.js" type="text/javascript"></script>
+<script src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/Controllers/AppStartup.js" type="text/javascript"></script>
+<script src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/models/models.js" type="text/javascript"></script>
+<script src="/Users/nomy/Documents/registrationServer/TimelessWealth/ClientSide/views/views.js" type="text/javascript"></script>
+
+<script>
+	/*
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '320816107960278', // App ID
+      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional initialization code here
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "http://connect.facebook.net/en_US/all.js";
+     d.getElementsByTagName('head')[0].appendChild(js);
+   }(document));
+*/
+</script>
+<body>
+
+	<div class="mainContainer">
+	
+			<div class ="mainHeading">
+				<p>Social Rx Commenting System!</p>
+			</div>
+		
+			<div class ="loginStatus">
+			</div>
+	
+			<div class ="postQuestion">
+				<input type="text" id="postQuestionText" class="postQuestionText" title="please post a question ... "><span><button id="button_login" class="loginButton" rel="#registrationPopup">post</button></input> 
+			</div>
+			
+			<div class="postAnswer">
+				<input type="text" id="postAnswerText" class="postAnswerText" title="please post an answer ... "><button id="b_postAnswer" class="b_answer">ans</button></input>
+			</div>
+		
+			<div class="leftPanel">
+				<div class="questionListPanel">
+					<div class="questionHeading">Answered Questions</div>
+					<div class="filterOptions">
+						<span class="sortItem"><a>Latest</a></span>
+						<span class="sortItem"><a>Most Discussed</a></span>
+					</div>
+					<div class="questionList">
+						<ul></ul>
+					</div>
+				</div>
+			</div>
+		
+			<div class="rightPanel">
+				<div class="answerPanel">
+					<div class="answerLabel2">Answer
+					</div>	
+
+					<div id = "answer_" class = "answer">
+					</div>
+				</div>
+			
+				<div class = "discussionFrame">
+					<div class = "commentsHeading">Discussion
+						<span class="filterOptions">
+							<span class="sortItem"><a>Latest</a></span>
+							<span class="sortItem"><a>Popular</a></span>
+							<span class="sortItem"><a>By: User</a></span>
+							<div class="userSearch">
+								<input type="text"/>
+							</div>
+						</span>
+					</div>
+				
+					<div class="questionDiscussionPanel">
+					</div>
+				
+					<div class = "inputButton">
+						<input type = "text" class = "inputButtonComment" id = "commentText" title="add a comment"></input>
+					</div>
+				</div>
+			</div>
+	</div>
+
+	<div id = "registrationPopup" class="simple_overlay">
+		<a class="close"></a>
+		
+		<div class="reg_leftPanel">
+			<div id="registrationContent">
+			</div>
+		</div>
+		
+		<div class="reg_rightPanel">
+			<div id= "selectedContent" class="selectedContent">
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>
+
+<script id = "question" type="text/html">
+	<li id=list_<%=Id%> class="listItem"><%=Question%>
+		<span id =dtPanel_<%=Id%> class="questionDetailPanel"></span>
+	</li>
+</script>
+
+<script id = "answerTemplate" type="text/html">
+<span id=answer_<%=Id%> class="answer"><%=Answer%></span>
+</script>
+
+<script id = "discussionTemplate" type="text/html">
+	<li class="listItemDisc">
+		<span class="userLabel"><%=User%>: </span>
+		<span class="userComment"><%=Comment%></span>
+	</li>
+</script>
+
+<script id = "commentTemplate" type="text/html">
+</script>
+
+<script id = "postQuestion" type = "text/html">
+<input type="text" id="postQuestionText" class="postQuestionText" title="please post a question ... "><span><button id="button_login" class="loginButton">post</button></input> 
+</script>
+
+<script id = "registrationFields" type = "text/html">
+	<div class = "registrationHeading">
+		<h1>Register<h1>
+	</div>
+	
+	<div class = "reg_name">
+		<div label = "reg_name">User Name <span><input id = "reg_name_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "reg_email">
+		<div label = "reg_email">Email <span><input id = "reg_email_text" type="text"></input></span></div>	</div>
+	
+	<div class = "reg_password">
+		<div label = "reg_password">Password <span><input id = "reg_password_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "submitButton">
+		<input class ="reg_Submit4" type="submit"/>
+	</div>
+</script>
+
+<script id = "loginFields" type = "text/html">
+	<div class = "loginHeading">
+		<h1>Login</h1>
+	</div>
+	
+	<div class = "login_name">
+		<div label = "log_name">User Name <span><input id = "login_name_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "login_password">
+		<div label = "log_password">Password <span><input id = "login_password_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "submitButton">
+		<input id = "login_Submit" type="submit"></input>
+	</div>
+</script>
+
+<script id= "overlayOptionMenu" type="text/html">
+	<div class="overlayClass">
+		<div class="loginINIT">Login</div>
+		<div class="registerINIT">Register</div>
+		<div class="FacebookINIT">Facebook</div>
+		<div class="TwitterINIT">Twitter</div>
+	</div>
+</script>
+
+<script id="loginTemplate" type="text/html">
+	<div>Logged in as: <span class="userName"><%=User%></span>
+	</div>
+</script>

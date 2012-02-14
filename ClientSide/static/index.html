@@ -1,0 +1,248 @@
+<html>
+<head>
+<style>
+.mainContainer
+{
+	width: 900px;
+	height: 800px;
+}
+
+.questionListPanel
+{
+	width: 600px;
+}
+
+.questionDetailPanel
+{
+	position: absolute;
+	left: 350px;
+	top: 3px;
+}
+
+.questionDiscussionPanel
+{
+	width: 400;
+}
+
+.questionList
+{
+	width: 300px;
+	list-style: none;
+	line-height: 35px;
+}
+
+.listButton
+{
+	float: right;	
+}
+
+.button
+{
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	border-radius: .5em;
+	border-style: ridge;
+	background-color: white;
+	border-color: white;
+}
+
+.button:hover 
+{
+	text-decoration: italic;
+}
+
+.button:active
+{
+	position: relative;
+	top: 1px;
+}
+
+.listItem
+{
+	border-style: none;
+	width: 300px;
+	cursor : hand;
+}
+
+.answer
+{
+	float:left;
+}
+
+.AnswerLabel
+{
+	color:red;
+	font-size:18px;
+	margin-bottom:5px;
+}
+
+.questionHeading
+{
+	font-size: 22px;
+	text-decoration: underline;
+	margin-bottom: 10px;
+}
+
+.postQuestion
+{
+	font-size: 18px;
+	width:800px;
+}
+
+.postQuestionText
+{
+	width: 600px;
+	border: ridge;
+	line-height: 40px;
+	border-radius: 10px;
+	border-image: initial
+}
+
+.loginButton
+{
+	line-height: 4;
+	backgounnd: #FFFFFF;
+	padding: 8;
+	border: 1px solid black;
+}
+
+input.labelHighlight 
+{ 
+	color: grey;
+	font-size: 22px;
+}
+
+.simple_overlay 
+{
+	
+	/* must be initially hidden */
+	display:none;
+	
+	/* place overlay on top of other elements */
+	z-index:10000;
+	
+	/* styling */
+	background-color: white;
+	
+	width:675px;	
+	min-height:200px;
+	border:1px solid #666;
+	
+	/* CSS3 styling for latest browsers */
+	-moz-box-shadow:0 0 90px 5px #000;
+	-webkit-box-shadow: 0 0 90px #000;	
+}
+
+/* close button positioned on upper right corner */
+.simple_overlay .close 
+{
+	background-image:url(../img/overlay/close.png);
+	position:absolute;
+	right:-15px;
+	top:-15px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+}
+</style>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/socket.io.js"></script> 
+
+
+<script src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/jquery.tools.min.js" type="text/javascript"></script>
+<script src="http://www.kryogenix.org/code/browser/labelify/jquery.labelify.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js" type="text/javascript"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js" type="text/javascript"></script></script>
+
+<script src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/AppStartup.js" type="text/javascript"></script>
+<script src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/models.js" type="text/javascript"></script>
+<script src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/views.js" type="text/javascript"></script>
+<script src="http://localhost:8888/wordpress/wp-content/plugins/TimelessWealth/authentication.js" type="text/javascript"></script>
+
+<body>
+
+<div class="mainContainer">
+	<div class ="postQuestion">
+	</div>
+	
+	<div class="questionListPanel">
+		<div class="questionHeading">Questions</div>
+		<div class="questionList">
+			<ul></ul>
+		</div
+	</div>
+	<span class="questionDiscussionPanel">
+	</span>
+</div>
+
+<div id = "registrationPopup" class="simple_overlay">
+</div>
+
+</body>
+</html>
+
+<!-- Templates for rendering -->
+<script id = "question" type="text/html">
+	<li id=list_<%=Id%> class="listItem"><%=Question%>
+		<span id =dtPanel_<%=Id%> class="questionDetailPanel"></span>
+	</li>
+</script>
+
+<script id = "answerTemplate" type="text/html">
+	<p class="AnswerLabel">Answer: </p><span id=answer_<%=Id%> class="answer"><%=Answer%></span>
+</script>
+
+<script id = "discussionTemplate" type="text/html">
+	<li class="listItem"><%=Comment%>
+	</li>
+</script>
+
+<script id = "commentTemplate" type="text/html">
+</script>
+
+<script id = "postQuestion" type = "text/html">
+		<input type="text" id="postQuestionText" class="postQuestionText" title="please post a question ... "><span><button id="button_login" class="loginButton" rel="#registrationPopup">login</button></login></input> 
+</script>
+
+<script id = "registrationFields" type = "text/html">
+	<div class = "registrationHeading">
+		<h1>Register<h1>
+	</div>
+	
+	<div class = "reg_name">
+		<div label = "reg_name">User Name <span><input id = "reg_name_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "reg_email">
+		<div label = "reg_email">Email <span><input id = "reg_email_text" type="text"></input></span></div>	
+	</div>
+	
+	<div class = "reg_password">
+		<div label = "reg_password">Password <span><input id = "reg_password_text" type="text"></input></span></div>
+	</div>
+	
+	<div class = "submitButton">
+		<input id = "reg_Submit" type="submit"></input>
+	</div>
+</script>
+
+<script id = "loginFields" type = "text/html">
+	<div class = "loginHeading">
+		<h1>Login<h1>
+	</div>
+	
+	<div class = "loginName">
+		<div label = "login_Name">User Name <span><input type="text"></input></span></div>
+	</div>
+	
+	<div class = "loginPassword">
+		<div label = "login_Password">Password <span><input type="text"></input></span></div>
+	</div>
+</script>

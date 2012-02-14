@@ -1,0 +1,25 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-d' ]
+info using npm@1.1.0-3
+info using node@v0.6.9
+verbose /usr/local/bin/node node symlink
+verbose config file /Users/nomy/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+ERR! Couldn't read dependencies.
+ERR! Error: ENOENT, no such file or directory '/Users/nomy/Documents/registrationServer/TimelessWealth/ServerSide/package.json'
+ERR! You may report this log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 11.2.0
+ERR! command "node" "/usr/local/bin/npm" "install" "-d"
+ERR! cwd /Users/nomy/Documents/registrationServer/TimelessWealth/ServerSide
+ERR! node -v v0.6.9
+ERR! npm -v 1.1.0-3
+ERR! path /Users/nomy/Documents/registrationServer/TimelessWealth/ServerSide/package.json
+ERR! code ENOENT
+ERR! message ENOENT, no such file or directory '/Users/nomy/Documents/registrationServer/TimelessWealth/ServerSide/package.json'
+ERR! errno {}
+verbose exit [ 1, true ]
